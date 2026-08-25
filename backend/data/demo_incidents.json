@@ -1,0 +1,38 @@
+[
+  {
+    "id": "SPL-2026-NEW-1872",
+    "timestamp": "2026-08-25T18:12:42Z",
+    "location": {
+      "lat": 19.323,
+      "lon": 65.914
+    },
+    "areaKm2": 23.7,
+    "confidence": 83.89999999999999,
+    "severity": "HIGH",
+    "status": "DETECTED"
+  },
+  {
+    "id": "SPL-2026-NEW-4341",
+    "timestamp": "2026-08-25T18:07:47Z",
+    "location": {
+      "lat": 17.448,
+      "lon": 71.642
+    },
+    "areaKm2": 33.2,
+    "confidence": 92.60000000000001,
+    "severity": "CRITICAL",
+    "status": "DETECTED"
+  },
+  {
+    "id": "SPL-2026-NEW-5349",
+    "timestamp": "2026-08-25T18:00:58Z",
+    "location": {
+      "lat": 18.471,
+      "lon": 70.299
+    },
+    "areaKm2": 27.7,
+    "confidence": 93.7,
+    "severity": "HIGH",
+    "status": "DETECTED"
+  }
+]

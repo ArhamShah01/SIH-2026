@@ -1,20 +1,25 @@
 import { api } from "@/lib/api/client"
 import { FullMap } from "@/components/map/FullMap"
 import { ServerCrash } from "lucide-react"
+export const dynamic = 'force-dynamic'
 
 export default async function MapPage() {
   const incidentsRes = await api.incidents.getAll()
   const isOffline = incidentsRes && 'error' in incidentsRes
   
-  const incidents = !isOffline && Array.isArray(incidentsRes) ? incidentsRes : []
-  const defaultIncidentId = incidents.length > 0 ? incidents[0].id : null
-  
-  // Fetch associated data for the map overlay if we have an active incident
-  const vesselsRes = defaultIncidentId ? await api.vessels.getNearby(defaultIncidentId) : []
-  const trajectoryRes = defaultIncidentId ? await api.trajectories.getByIncidentId(defaultIncidentId) : []
+  const incidents = !('error' in incidentsRes) && Array.isArray(incidentsRes) ? incidentsRes : []
 
-  const vessels = !('error' in vesselsRes) && Array.isArray(vesselsRes) ? vesselsRes : []
-  const trajectory = !('error' in trajectoryRes) && Array.isArray(trajectoryRes) ? trajectoryRes : []
+  // Fetch associated data for ALL incidents
+  const vesselsPromises = incidents.map(inc => api.vessels.getNearby(inc.id))
+  const trajectoriesPromises = incidents.map(inc => api.trajectories.getByIncidentId(inc.id))
+  
+  const vesselsResponses = await Promise.all(vesselsPromises)
+  const trajectoriesResponses = await Promise.all(trajectoriesPromises)
+
+  const vessels = vesselsResponses.flatMap(res => !('error' in res) && Array.isArray(res) ? res : [])
+  const trajectories = trajectoriesResponses.map(res => !('error' in res) && Array.isArray(res) ? res : [])
+
+  console.log(`[DEBUG] Rendered map with ${incidents.length} incidents and ${trajectories.length} trajectories`);
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)]">
@@ -33,8 +38,8 @@ export default async function MapPage() {
           Interactive visualization of spills, vessels, and drift trajectories.
         </p>
       </div>
-      <div className="flex-1 min-h-[500px]">
-        <FullMap incidents={incidents} vessels={vessels} trajectory={trajectory} />
+      <div className="flex-1 relative bg-secondary rounded-xl overflow-hidden border border-border shadow-sm">
+        <FullMap incidents={incidents} vessels={vessels} trajectories={trajectories} />
       </div>
     </div>
   )

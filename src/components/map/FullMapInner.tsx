@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { Incident, Vessel, TrajectoryPoint } from "@/data/types"
-import { MapContainer, TileLayer, Marker, Popup, Circle, Polyline } from "react-leaflet"
+import { MapContainer, TileLayer, Marker, Popup, Circle, Polyline, Tooltip, LayerGroup } from "react-leaflet"
 import { Badge } from "@/components/ui/badge"
 import "leaflet/dist/leaflet.css"
 import L from "leaflet"
@@ -28,10 +28,10 @@ const vesselIcon = L.divIcon({
 interface FullMapInnerProps {
   incidents: Incident[]
   vessels: Vessel[]
-  trajectory: TrajectoryPoint[]
+  trajectories: TrajectoryPoint[][]
 }
 
-export default function FullMapInner({ incidents, vessels, trajectory }: FullMapInnerProps) {
+export default function FullMapInner({ incidents, vessels, trajectories }: FullMapInnerProps) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -43,7 +43,6 @@ export default function FullMapInner({ incidents, vessels, trajectory }: FullMap
   }
 
   const center = { lat: 15.42, lng: 67.83 }
-  const trajectoryPositions: [number, number][] = trajectory.map(t => [t.coordinates.lat, t.coordinates.lon])
 
   return (
     <div className="relative h-full w-full rounded-xl overflow-hidden border border-border">
@@ -100,16 +99,31 @@ export default function FullMapInner({ incidents, vessels, trajectory }: FullMap
           </Marker>
         ))}
 
-        {/* Trajectory */}
-        <Polyline positions={trajectoryPositions} pathOptions={{ color: '#8b5cf6', weight: 3, dashArray: '5, 5' }} />
-        {trajectory.map((t, i) => (
-          <Circle
-            key={i}
-            center={[t.coordinates.lat, t.coordinates.lon]}
-            radius={t.uncertaintyRadiusKm * 1000}
-            pathOptions={{ color: '#8b5cf6', fillColor: '#8b5cf6', fillOpacity: 0.1, weight: 1 }}
-          />
-        ))}
+        {/* Trajectories */}
+        {trajectories.map((traj, idx) => {
+          if (!traj || traj.length === 0) return null;
+          const positions: [number, number][] = traj.map(t => [t.coordinates.lat, t.coordinates.lon]);
+          return (
+            <LayerGroup key={`traj-${idx}`}>
+              <Polyline positions={positions} pathOptions={{ color: '#8b5cf6', weight: 3, dashArray: '5, 5' }} />
+              {traj.map((t, i) => {
+                const isPast = t.timeOffsetHours < 0;
+                const isFuture = t.timeOffsetHours > 0;
+                const color = isPast ? '#f59e0b' : isFuture ? '#8b5cf6' : '#ef4444';
+                return (
+                  <Circle
+                    key={i}
+                    center={[t.coordinates.lat, t.coordinates.lon]}
+                    radius={t.uncertaintyRadiusKm * 1000}
+                    pathOptions={{ color: color, fillColor: color, fillOpacity: 0.1, weight: 1 }}
+                  >
+                    <Tooltip>{isPast ? `Origin Estimate (${t.timeOffsetHours}h)` : isFuture ? `Drift Prediction (+${t.timeOffsetHours}h)` : "Detection Point (0h)"}</Tooltip>
+                  </Circle>
+                )
+              })}
+            </LayerGroup>
+          )
+        })}
 
       </MapContainer>
 

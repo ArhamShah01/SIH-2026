@@ -1,0 +1,105 @@
+[
+  {
+    "incidentId": "SPL-2026-0825-ARB001",
+    "vessels": [
+      {
+        "mmsi": 412345678,
+        "name": "GULF CARRIER IX",
+        "type": "Crude Oil Tanker",
+        "position": {"lat": 15.231, "lon": 67.445},
+        "speed": 4.2,
+        "heading": 142,
+        "course": 145,
+        "timestamp": "2026-08-24T22:30:00Z",
+        "riskScore": null
+      },
+      {
+        "mmsi": 636091234,
+        "name": "OCEAN VENTURE",
+        "type": "Product Tanker",
+        "position": {"lat": 15.510, "lon": 67.920},
+        "speed": 11.5,
+        "heading": 78,
+        "course": 80,
+        "timestamp": "2026-08-25T05:45:00Z",
+        "riskScore": null
+      },
+      {
+        "mmsi": 538006789,
+        "name": "STAR PIONEER",
+        "type": "Bulk Carrier",
+        "position": {"lat": 15.880, "lon": 68.110},
+        "speed": 13.1,
+        "heading": 265,
+        "course": 262,
+        "timestamp": "2026-08-25T06:00:00Z",
+        "riskScore": null
+      }
+    ]
+  },
+  {
+    "incidentId": "SPL-2026-0824-ARB002",
+    "vessels": [
+      {
+        "mmsi": 311000456,
+        "name": "ARABIAN PEARL",
+        "type": "Chemical Tanker",
+        "position": {"lat": 18.72, "lon": 71.05},
+        "speed": 6.8,
+        "heading": 195,
+        "course": 198,
+        "timestamp": "2026-08-24T12:15:00Z",
+        "riskScore": null
+      },
+      {
+        "mmsi": 477998123,
+        "name": "JADE EXPRESS",
+        "type": "Container Ship",
+        "position": {"lat": 19.15, "lon": 71.42},
+        "speed": 15.3,
+        "heading": 45,
+        "course": 42,
+        "timestamp": "2026-08-24T14:00:00Z",
+        "riskScore": null
+      }
+    ]
+  },
+  {
+    "incidentId": "SPL-2026-0823-GOM001",
+    "vessels": [
+      {
+        "mmsi": 256123456,
+        "name": "CASPIAN TIDE",
+        "type": "Crude Oil Tanker",
+        "position": {"lat": 21.88, "lon": 63.32},
+        "speed": 3.1,
+        "heading": 310,
+        "course": 315,
+        "timestamp": "2026-08-23T18:00:00Z",
+        "riskScore": null
+      },
+      {
+        "mmsi": 352789012,
+        "name": "PANAMA SPIRIT",
+        "type": "Product Tanker",
+        "position": {"lat": 22.35, "lon": 63.80},
+        "speed": 9.4,
+        "heading": 118,
+        "course": 120,
+        "timestamp": "2026-08-23T21:30:00Z",
+        "riskScore": null
+      },
+      {
+        "mmsi": 636045678,
+        "name": "SEA GUARDIAN",
+        "type": "LPG Tanker",
+        "position": {"lat": 22.50, "lon": 64.10},
+        "speed": 12.0,
+        "heading": 90,
+        "course": 88,
+        "timestamp": "2026-08-23T22:00:00Z",
+        "riskScore": null
+      }
+    ]
+  }
+]

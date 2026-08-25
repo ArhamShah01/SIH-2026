@@ -8,8 +8,8 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8
 async function safeFetch<T>(endpoint: string, options?: RequestInit): Promise<T | ApiError> {
   try {
     const res = await fetch(`${API_BASE_URL}${endpoint}`, {
-      // Add a short timeout so pages don't hang indefinitely if backend is offline
-      signal: AbortSignal.timeout(3000), 
+      // Add a generous timeout to allow for physics simulations to run
+      signal: AbortSignal.timeout(60000), 
       ...options,
       // For Next.js server components, revalidate frequently or set to no-store for real-time
       cache: "no-store"

@@ -10,7 +10,7 @@ const FullMapInner = dynamic(() => import("./FullMapInner"), {
 interface FullMapProps {
   incidents: Incident[]
   vessels: Vessel[]
-  trajectory: TrajectoryPoint[]
+  trajectories: TrajectoryPoint[][]
 }
 
 export function FullMap(props: FullMapProps) {

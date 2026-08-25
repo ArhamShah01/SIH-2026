@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Upload, FileImage, Settings, Play, ServerCrash, AlertTriangle, Layers } from "lucide-react"
+import { Upload, FileImage, Settings, Play, ServerCrash, AlertTriangle, Layers, ShieldCheck } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -113,10 +113,32 @@ export default function DetectionPage() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  <div className="relative aspect-video rounded-lg overflow-hidden border border-border bg-secondary flex items-center justify-center group">
-                    <div className="text-muted-foreground">Awaiting prediction data...</div>
+                  <div className="relative aspect-video rounded-lg overflow-hidden border border-border bg-secondary flex flex-col items-center justify-center p-8 text-center group">
+                    {result?.predictionAvailable ? (
+                      <div className="space-y-4">
+                        <div className="h-16 w-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-2 border border-primary/50">
+                           <ShieldCheck className="h-8 w-8 text-primary" />
+                        </div>
+                        <h3 className="text-xl font-bold text-primary">Oil Spill Detected</h3>
+                        <div className="grid grid-cols-2 gap-4 text-sm mt-4 text-left bg-background p-4 rounded-lg border border-border">
+                          <div>
+                            <p className="text-muted-foreground mb-1">Confidence Score</p>
+                            <p className="font-semibold text-lg text-green-400">{(result.confidence * 100).toFixed(1)}%</p>
+                          </div>
+                          <div>
+                            <p className="text-muted-foreground mb-1">Estimated Area</p>
+                            <p className="font-semibold text-lg">{result.spillAreaKm2.toFixed(1)} km²</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-4">
+                          Note: Visual image overlay is disabled in this demo environment. Data has been logged to the central database.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="text-muted-foreground">No prediction data available.</div>
+                    )}
                     <div className="absolute top-4 left-4 flex gap-2">
-                      <Badge variant="ai">Segmentation Overlay</Badge>
+                      <Badge variant="ai">Segmentation Result</Badge>
                     </div>
                   </div>
                   <div className="flex justify-end gap-2">
