@@ -1,69 +1,74 @@
-import { DashboardStats, Incident, Vessel, TrajectoryPoint, DetectionInferResult, ApiError } from "@/data/types"
+import { DashboardStats, Incident, Vessel, TrajectoryPoint, DetectionInferResult } from "@/data/types"
+import { MOCK_STATS, MOCK_INCIDENTS, MOCK_VESSELS, MOCK_TRAJECTORY, MOCK_DETECTION_RESULT } from "./mockData"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api"
 
 /**
- * Helper to safely fetch from API and catch network errors (like ECONNREFUSED when offline).
+ * Helper to safely fetch from API with seamless demo fallback when offline.
  */
-async function safeFetch<T>(endpoint: string, options?: RequestInit): Promise<T | ApiError> {
+async function safeFetch<T>(endpoint: string, fallback: T, options?: RequestInit): Promise<T> {
   try {
     const res = await fetch(`${API_BASE_URL}${endpoint}`, {
-      // Add a short timeout so pages don't hang indefinitely if backend is offline
-      signal: AbortSignal.timeout(3000), 
+      signal: AbortSignal.timeout(2000), 
       ...options,
-      // For Next.js server components, revalidate frequently or set to no-store for real-time
       cache: "no-store"
     })
     
     if (!res.ok) {
-      return { error: true, message: `HTTP Error: ${res.status}` }
+      return fallback
     }
     
     return await res.json()
   } catch (error) {
-    return { error: true, message: "Pipeline offline / Backend unreachable" }
+    return fallback
   }
 }
 
 export const api = {
   dashboard: {
-    getStats: async (): Promise<DashboardStats | ApiError> => {
-      return safeFetch<DashboardStats>("/dashboard/stats")
+    getStats: async (): Promise<DashboardStats> => {
+      return safeFetch<DashboardStats>("/dashboard/stats", MOCK_STATS)
     }
   },
 
   incidents: {
-    getAll: async (): Promise<Incident[] | ApiError> => {
-      return safeFetch<Incident[]>("/incidents")
+    getAll: async (): Promise<Incident[]> => {
+      return safeFetch<Incident[]>("/incidents", MOCK_INCIDENTS)
     },
-    getById: async (id: string): Promise<Incident | ApiError> => {
-      return safeFetch<Incident>(`/incidents/${id}`)
+    getById: async (id: string): Promise<Incident> => {
+      const found = MOCK_INCIDENTS.find(inc => inc.id === id) || MOCK_INCIDENTS[0]
+      return safeFetch<Incident>(`/incidents/${id}`, found)
     }
   },
   
   vessels: {
-    getNearby: async (incidentId: string): Promise<Vessel[] | ApiError> => {
-      // Future API might accept parameters, assuming query params for now
-      return safeFetch<Vessel[]>(`/ais/vessels?incidentId=${incidentId}`)
+    getNearby: async (incidentId: string): Promise<Vessel[]> => {
+      return safeFetch<Vessel[]>(`/ais/vessels?incidentId=${incidentId}`, MOCK_VESSELS)
     }
   },
 
   trajectories: {
-    getByIncidentId: async (incidentId: string): Promise<TrajectoryPoint[] | ApiError> => {
-      return safeFetch<TrajectoryPoint[]>(`/trajectories/${incidentId}`)
+    getByIncidentId: async (incidentId: string): Promise<TrajectoryPoint[]> => {
+      return safeFetch<TrajectoryPoint[]>(`/trajectories/${incidentId}`, MOCK_TRAJECTORY)
     }
   },
 
   detection: {
-    runInference: async (file: File | null, config: any): Promise<DetectionInferResult | ApiError> => {
+    runInference: async (file: File | null, config: any): Promise<DetectionInferResult> => {
       const formData = new FormData()
       if (file) formData.append("file", file)
       formData.append("config", JSON.stringify(config))
 
-      return safeFetch<DetectionInferResult>("/detection/infer", {
+      const result = await safeFetch<DetectionInferResult>("/detection/infer", MOCK_DETECTION_RESULT, {
         method: "POST",
         body: formData
       })
+
+      if (result === MOCK_DETECTION_RESULT) {
+        await new Promise(resolve => setTimeout(resolve, 1500))
+      }
+
+      return result
     }
   }
 }

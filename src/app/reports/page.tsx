@@ -39,21 +39,21 @@ export default async function ReportsPage() {
           <CardTitle>Available Reports</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto rounded-lg border border-border">
             <table className="w-full text-sm text-left">
-              <thead className="bg-secondary/50 text-muted-foreground uppercase text-xs">
+              <thead className="bg-slate-50 text-slate-600 uppercase text-xs border-b border-border font-semibold tracking-wider">
                 <tr>
-                  <th className="px-4 py-3 font-medium">Report ID</th>
-                  <th className="px-4 py-3 font-medium">Incident</th>
-                  <th className="px-4 py-3 font-medium">Date</th>
-                  <th className="px-4 py-3 font-medium">Severity</th>
-                  <th className="px-4 py-3 font-medium">Status</th>
-                  <th className="px-4 py-3 font-medium text-right">Actions</th>
+                  <th className="px-4 py-3.5 font-semibold">Report ID</th>
+                  <th className="px-4 py-3.5 font-semibold">Incident</th>
+                  <th className="px-4 py-3.5 font-semibold">Date</th>
+                  <th className="px-4 py-3.5 font-semibold">Severity</th>
+                  <th className="px-4 py-3.5 font-semibold">Status</th>
+                  <th className="px-4 py-3.5 font-semibold text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/50">
+              <tbody className="divide-y divide-border">
                 {incidents.map((incident, idx) => (
-                  <tr key={incident.id} className="hover:bg-secondary/20 transition-colors">
+                  <tr key={incident.id} className="hover:bg-slate-50/80 transition-colors">
                     <td className="px-4 py-3 font-medium text-primary">
                       REP-{incident.id.split('-')[2] || incident.id}-00{idx + 1}
                     </td>

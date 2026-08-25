@@ -47,32 +47,32 @@
 }
 
 :root {
-  /* Maritime dark theme as default */
-  --background: #020617; /* slate-950 */
-  --foreground: #f8fafc; /* slate-50 */
+  /* Minimalist White theme */
+  --background: #f8fafc; /* slate-50 */
+  --foreground: #0f172a; /* slate-900 */
   
-  --card: #0f172a; /* slate-900 */
-  --card-foreground: #f8fafc;
+  --card: #ffffff; /* pure white */
+  --card-foreground: #0f172a;
   
-  --popover: #0f172a;
-  --popover-foreground: #f8fafc;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
   
-  --primary: #06b6d4; /* cyan-500 */
+  --primary: #0284c7; /* ocean sky-600 */
   --primary-foreground: #ffffff;
   
-  --secondary: #1e293b; /* slate-800 */
-  --secondary-foreground: #f8fafc;
+  --secondary: #f1f5f9; /* slate-100 */
+  --secondary-foreground: #0f172a;
   
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8; /* slate-400 */
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b; /* slate-500 */
   
-  --accent: #1e293b;
-  --accent-foreground: #f8fafc;
+  --accent: #f1f5f9;
+  --accent-foreground: #0f172a;
   
   --destructive: #ef4444; /* red-500 */
   --destructive-foreground: #ffffff;
   
-  --ai: #8b5cf6; /* violet-500 */
+  --ai: #7c3aed; /* violet-600 */
   --ai-foreground: #ffffff;
   
   --safe: #10b981; /* emerald-500 */
@@ -81,9 +81,9 @@
   --warning: #f59e0b; /* amber-500 */
   --warning-foreground: #ffffff;
 
-  --border: #1e293b;
-  --input: #1e293b;
-  --ring: #06b6d4;
+  --border: #e2e8f0; /* slate-200 */
+  --input: #e2e8f0;
+  --ring: #0284c7;
   
   --radius: 0.5rem;
 }
@@ -97,29 +97,32 @@
   }
 }
 
-/* Leaflet dark mode overrides */
+/* Leaflet light mode overrides */
 .leaflet-container {
-  background: #020617 !important;
+  background: #f8fafc !important;
   font-family: inherit !important;
 }
 
 .leaflet-control-zoom a {
-  background-color: #0f172a !important;
-  color: #f8fafc !important;
-  border-color: #1e293b !important;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
 }
 
 .leaflet-control-zoom a:hover {
-  background-color: #1e293b !important;
+  background-color: #f8fafc !important;
+  color: #0284c7 !important;
 }
 
 .leaflet-popup-content-wrapper {
-  background-color: #0f172a !important;
-  color: #f8fafc !important;
-  border: 1px solid #1e293b !important;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
   border-radius: 0.5rem !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
 }
 
 .leaflet-popup-tip {
-  background-color: #0f172a !important;
+  background-color: #ffffff !important;
 }

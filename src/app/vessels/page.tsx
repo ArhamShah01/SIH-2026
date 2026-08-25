@@ -44,21 +44,21 @@ export default async function VesselsPage({
               <CardTitle>Potential Source Vessels</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto rounded-lg border border-border">
                 <table className="w-full text-sm text-left">
-                  <thead className="bg-secondary/50 text-muted-foreground uppercase text-xs">
+                  <thead className="bg-slate-50 text-slate-600 uppercase text-xs border-b border-border font-semibold tracking-wider">
                     <tr>
-                      <th className="px-4 py-3 font-medium">Rank</th>
-                      <th className="px-4 py-3 font-medium">Vessel / MMSI</th>
-                      <th className="px-4 py-3 font-medium">Type</th>
-                      <th className="px-4 py-3 font-medium">Distance</th>
-                      <th className="px-4 py-3 font-medium">Last Seen</th>
-                      <th className="px-4 py-3 font-medium">Risk Score</th>
+                      <th className="px-4 py-3.5 font-semibold">Rank</th>
+                      <th className="px-4 py-3.5 font-semibold">Vessel / MMSI</th>
+                      <th className="px-4 py-3.5 font-semibold">Type</th>
+                      <th className="px-4 py-3.5 font-semibold">Distance</th>
+                      <th className="px-4 py-3.5 font-semibold">Last Seen</th>
+                      <th className="px-4 py-3.5 font-semibold">Risk Score</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-border/50">
+                  <tbody className="divide-y divide-border">
                     {sortedVessels.map((vessel, idx) => (
-                      <tr key={vessel.mmsi} className="hover:bg-secondary/20 transition-colors cursor-pointer">
+                      <tr key={vessel.mmsi} className="hover:bg-slate-50/80 transition-colors cursor-pointer">
                         <td className="px-4 py-3 font-medium text-muted-foreground">
                           {idx + 1}
                         </td>
@@ -150,7 +150,7 @@ export default async function VesselsPage({
                 <div className="relative h-32 bg-secondary rounded-md overflow-hidden border border-border flex items-center justify-center group">
                   <div className="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
                   <span className="text-muted-foreground text-sm z-10 relative">Awaiting Trajectory Data</span>
-                  <Badge className="absolute top-2 left-2 bg-black/60 text-white border-none z-10 relative">AIS Track</Badge>
+                  <Badge className="absolute top-2 left-2 bg-white/90 text-slate-800 border border-slate-200 shadow-xs z-10 relative">AIS Track</Badge>
                 </div>
               </div>
             </CardContent>
