@@ -20,7 +20,7 @@ const icon = L.icon({
 
 const vesselIcon = L.divIcon({
   className: 'bg-transparent',
-  html: `<div style="background-color: #06b6d4; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 4px rgba(0,0,0,0.5);"></div>`,
+  html: `<div style="background-color: #0284c7; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>`,
   iconSize: [12, 12],
   iconAnchor: [6, 6]
 });
@@ -45,7 +45,7 @@ export default function FullMapInner({ incidents, vessels, trajectories }: FullM
   const center = { lat: 15.42, lng: 67.83 }
 
   return (
-    <div className="relative h-full w-full rounded-xl overflow-hidden border border-border">
+    <div className="relative h-full w-full rounded-xl overflow-hidden border border-border shadow-xs">
       <MapContainer 
         center={[center.lat, center.lng]} 
         zoom={7} 
@@ -53,7 +53,7 @@ export default function FullMapInner({ incidents, vessels, trajectories }: FullM
         zoomControl={true}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         />
         
@@ -71,7 +71,7 @@ export default function FullMapInner({ incidents, vessels, trajectories }: FullM
                 {incident.severity}
               </Badge>
               <br/>
-              <Link href={`/analysis/${incident.id}`} className="text-primary text-xs hover:underline">
+              <Link href={`/analysis/${incident.id}`} className="text-primary text-xs hover:underline font-medium">
                 View Analysis &rarr;
               </Link>
             </Popup>
@@ -105,11 +105,11 @@ export default function FullMapInner({ incidents, vessels, trajectories }: FullM
           const positions: [number, number][] = traj.map(t => [t.coordinates.lat, t.coordinates.lon]);
           return (
             <LayerGroup key={`traj-${idx}`}>
-              <Polyline positions={positions} pathOptions={{ color: '#8b5cf6', weight: 3, dashArray: '5, 5' }} />
+              <Polyline positions={positions} pathOptions={{ color: '#7c3aed', weight: 3, dashArray: '5, 5' }} />
               {traj.map((t, i) => {
                 const isPast = t.timeOffsetHours < 0;
                 const isFuture = t.timeOffsetHours > 0;
-                const color = isPast ? '#f59e0b' : isFuture ? '#8b5cf6' : '#ef4444';
+                const color = isPast ? '#f59e0b' : isFuture ? '#7c3aed' : '#ef4444';
                 return (
                   <Circle
                     key={i}
@@ -128,8 +128,8 @@ export default function FullMapInner({ incidents, vessels, trajectories }: FullM
       </MapContainer>
 
       {/* Map Legend overlay */}
-      <div className="absolute bottom-6 right-6 z-10 bg-black/80 backdrop-blur border border-border p-4 rounded-lg shadow-lg">
-        <h4 className="text-sm font-semibold mb-3 border-b border-border/50 pb-2">Legend</h4>
+      <div className="absolute bottom-6 right-6 z-10 bg-white/95 backdrop-blur border border-border p-4 rounded-xl shadow-md text-foreground">
+        <h4 className="text-sm font-semibold mb-3 border-b border-border/80 pb-2">Legend</h4>
         <div className="space-y-2 text-xs">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-destructive/80"></div>

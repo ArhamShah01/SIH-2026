@@ -132,27 +132,27 @@ export default async function AnalysisPage({ params }: { params: { incidentId: s
                 </TabsList>
                 
                 {/* Same UI structure but awaiting data for background images */}
-                <TabsContent value="original" className="relative aspect-[4/3] bg-secondary flex items-center justify-center rounded-lg overflow-hidden border border-border">
+                <TabsContent value="original" className="relative aspect-[4/3] bg-secondary/50 flex items-center justify-center rounded-lg overflow-hidden border border-border">
                   <p className="text-muted-foreground">Awaiting SAR imagery data</p>
-                  <Badge className="absolute top-4 left-4 bg-black/60 text-white border-none">SAR Composite</Badge>
+                  <Badge className="absolute top-4 left-4 bg-white/90 text-slate-800 border border-slate-200 shadow-xs">SAR Composite</Badge>
                 </TabsContent>
                 
-                <TabsContent value="vv" className="relative aspect-[4/3] bg-secondary flex items-center justify-center rounded-lg overflow-hidden border border-border">
+                <TabsContent value="vv" className="relative aspect-[4/3] bg-secondary/50 flex items-center justify-center rounded-lg overflow-hidden border border-border">
                   <p className="text-muted-foreground">Awaiting SAR imagery data</p>
-                  <Badge className="absolute top-4 left-4 bg-black/60 text-white border-none">VV Polarization (Sigma0)</Badge>
+                  <Badge className="absolute top-4 left-4 bg-white/90 text-slate-800 border border-slate-200 shadow-xs">VV Polarization (Sigma0)</Badge>
                 </TabsContent>
 
-                <TabsContent value="vh" className="relative aspect-[4/3] bg-secondary flex items-center justify-center rounded-lg overflow-hidden border border-border">
+                <TabsContent value="vh" className="relative aspect-[4/3] bg-secondary/50 flex items-center justify-center rounded-lg overflow-hidden border border-border">
                   <p className="text-muted-foreground">Awaiting SAR imagery data</p>
-                  <Badge className="absolute top-4 left-4 bg-black/60 text-white border-none">VH Polarization (Sigma0)</Badge>
+                  <Badge className="absolute top-4 left-4 bg-white/90 text-slate-800 border border-slate-200 shadow-xs">VH Polarization (Sigma0)</Badge>
                 </TabsContent>
 
-                <TabsContent value="prediction" className="relative aspect-[4/3] bg-secondary flex items-center justify-center rounded-lg overflow-hidden border border-border bg-black">
+                <TabsContent value="prediction" className="relative aspect-[4/3] bg-secondary/50 flex items-center justify-center rounded-lg overflow-hidden border border-border">
                   <p className="text-muted-foreground">Awaiting Prediction Mask</p>
-                  <Badge className="absolute top-4 left-4 bg-black/60 text-white border-none">Segmentation Mask</Badge>
+                  <Badge className="absolute top-4 left-4 bg-white/90 text-slate-800 border border-slate-200 shadow-xs">Segmentation Mask</Badge>
                 </TabsContent>
 
-                <TabsContent value="overlay" className="relative aspect-[4/3] bg-secondary flex items-center justify-center rounded-lg overflow-hidden border border-border group">
+                <TabsContent value="overlay" className="relative aspect-[4/3] bg-secondary/50 flex items-center justify-center rounded-lg overflow-hidden border border-border group">
                   <p className="text-muted-foreground">Awaiting Overlay Analysis</p>
                   <div className="absolute top-4 left-4 flex gap-2">
                     <Badge variant="ai">Overlay Analysis</Badge>

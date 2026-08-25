@@ -11,7 +11,7 @@ export function MapPreview({ incidents }: { incidents: Incident[] }) {
   return (
     <div className="h-full w-full relative">
       <MapPreviewInner incidents={incidents} />
-      <div className="absolute top-2 left-2 z-10 bg-black/60 backdrop-blur text-white text-xs px-2 py-1 rounded">
+      <div className="absolute top-2 left-2 z-10 bg-white/90 backdrop-blur border border-border text-foreground text-xs px-2.5 py-1 rounded-md shadow-xs font-semibold tracking-wider">
         MARITIME OVERVIEW
       </div>
     </div>

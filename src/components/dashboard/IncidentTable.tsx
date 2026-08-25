@@ -27,22 +27,22 @@ export function IncidentTable({ incidents, isOffline }: IncidentTableProps) {
   }
 
   return (
-    <div className="overflow-x-auto rounded-md border border-border">
+    <div className="overflow-x-auto rounded-xl border border-border bg-card shadow-xs">
       <table className="w-full text-sm text-left">
-        <thead className="bg-secondary/50 text-muted-foreground uppercase text-xs">
+        <thead className="bg-slate-50 text-slate-600 uppercase text-xs border-b border-border font-semibold tracking-wider">
           <tr>
-            <th className="px-4 py-3 font-medium">Incident ID</th>
-            <th className="px-4 py-3 font-medium">Timestamp</th>
-            <th className="px-4 py-3 font-medium">Location</th>
-            <th className="px-4 py-3 font-medium">Area</th>
-            <th className="px-4 py-3 font-medium">Confidence</th>
-            <th className="px-4 py-3 font-medium">Severity</th>
-            <th className="px-4 py-3 font-medium">Status</th>
+            <th className="px-4 py-3.5 font-semibold">Incident ID</th>
+            <th className="px-4 py-3.5 font-semibold">Timestamp</th>
+            <th className="px-4 py-3.5 font-semibold">Location</th>
+            <th className="px-4 py-3.5 font-semibold">Area</th>
+            <th className="px-4 py-3.5 font-semibold">Confidence</th>
+            <th className="px-4 py-3.5 font-semibold">Severity</th>
+            <th className="px-4 py-3.5 font-semibold">Status</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-border/50">
+        <tbody className="divide-y divide-border">
           {incidents.map((incident) => (
-            <tr key={incident.id} className="hover:bg-secondary/20 transition-colors">
+            <tr key={incident.id} className="hover:bg-slate-50/80 transition-colors">
               <td className="px-4 py-3 font-medium text-primary">
                 <Link href={`/analysis/${incident.id}`} className="hover:underline">
                   {incident.id}
